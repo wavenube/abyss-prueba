@@ -25,6 +25,18 @@ global.titulowm = 'Abyss┃ᴮᴼᵀ';
 global.titulowm2 = `Abyss┃ᴮᴼᵀ`
 global.igfg = 'Abyss┃ᴮᴼᵀ';
 global.wait = '⌛ _Cargando..._\n*▬▬▬▭*';
+global.fgig = 'https://instagram.com/abyss_wabot' 
+global.fgsc = 'Error' 
+global.fgyt = 'Error'
+global.fgpyp = 'Error'
+global.fglog = 'https://i.ibb.co/QdGBLgw/zephyr2.png' 
+
+//--- Grupos WA
+global.id_canal = '120363318622514917@newsletter' //-ID de canal de WhatsApp
+global.fgcanal = 'https://whatsapp.com/channel/0029VakDx9I0gcfFXnzZIX2v'
+global.bgp = 'https://chat.whatsapp.com/IYsbScC3cMzBcakINRWJL6'
+global.bgp2 = 'https://chat.whatsapp.com/IYsbScC3cMzBcakINRWJL6'
+global.bgp3 = 'https://chat.whatsapp.com/IYsbScC3cMzBcakINRWJL6' //--GP NSFW
 
 global.imagen1 = fs.readFileSync('./src/abyss.png');
 global.imagen2 = fs.readFileSync('./src/abyss2.png');
