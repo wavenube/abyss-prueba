@@ -15,7 +15,7 @@ const handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, i
     // const pp = imagen7;
 
     // let vn = './media/menu.mp3'
-    const img = './src/abyss.png';
+    const img = './Menu2.jpg';
     const d = new Date(new Date + 3600000);
     const locale = 'es-ES';
     const week = d.toLocaleDateString(locale, { weekday: 'long' });
@@ -523,17 +523,17 @@ ${tradutor.texto1[9]} ${user.premiumTime > 0 ? '✅' : (isPrems ? '✅' : '❌')
     let pp
     // Nouvelles images de menu disponibles 
     if (idioma == 'es') {
-      pp = global.imagen1
+      pp = global.imagen4
     } else if (idioma == 'pt-br') {
-      pp = global.imagen1
+      pp = global.imagen7
     } else if (idioma == 'fr') {
-      pp = global.imagen1
+      pp = global.imagen8
     }else if (idioma == 'en') {
-      pp = global.imagen1
+      pp = global.imagen9
     } else if (idioma == 'ru') {
-      pp = global.imagen1
+      pp = global.imagen10
     } else {
-      pp = global.imagen1 // Imagem Default em espanhol
+      pp = global.imagen4 // Imagem Default em espanhol
     }
 
 
