@@ -15,27 +15,27 @@ global.owner = [
   ['34638075812']
 ];
 
-global.suittag = ['5219993404349'];
-global.prems = ['51995386439'];
+global.suittag = ['5492613619545'];
+global.prems = ['5492613619545'];
 
 global.packname = 'Sticker';
-global.author = 'The Mystic - Bot';
-global.wm = 'The Mystic - Bot';
-global.titulowm = 'The Mystic - Bot';
-global.titulowm2 = `The Mystic - Bot`
-global.igfg = 'The Mystic - Bot';
-global.wait = '*_[ ⏳ ] Cargando..._*';
+global.author = '@ZephyrByte';
+global.wm = 'Abyss┃ᴮᴼᵀ';
+global.titulowm = 'Abyss┃ᴮᴼᵀ';
+global.titulowm2 = `Abyss┃ᴮᴼᵀ`
+global.igfg = 'Abyss┃ᴮᴼᵀ';
+global.wait = '⌛ _Cargando..._\n*▬▬▬▭*';
 
-global.imagen1 = fs.readFileSync('./Menu2.jpg');
-global.imagen2 = fs.readFileSync('./src/nuevobot.jpg');
-global.imagen3 = fs.readFileSync('./src/Pre Bot Publi.png');
-global.imagen4 = fs.readFileSync('./Menu.png');
+global.imagen1 = fs.readFileSync('./src/abyss.png');
+global.imagen2 = fs.readFileSync('./src/abyss2.png');
+global.imagen3 = fs.readFileSync('./src/abyss3.png');
+global.imagen4 = fs.readFileSync('./src/abyss4.png');
 global.imagen5 = fs.readFileSync('./src/+18.jpg');
-global.imagen6 = fs.readFileSync('./Menu3.png');
-global.imagen7 = fs.readFileSync('./src/menu_pt.png');
-global.imagen8 = fs.readFileSync('./src/menu_fr.png')
-global.imagen9 = fs.readFileSync('./src/menu_en.png')
-global.imagen10 = fs.readFileSync('./src/menu_ru.png')
+global.imagen6 = fs.readFileSync('./abyss5.png');
+global.imagen7 = fs.readFileSync('./src/abyss.png');
+global.imagen8 = fs.readFileSync('./src/abyss5.png')
+global.imagen9 = fs.readFileSync('./src/abyss.png')
+global.imagen10 = fs.readFileSync('./src/abyss5.png')
 
 global.mods = [];
 
@@ -48,16 +48,16 @@ global.mes = d.toLocaleDateString('es', {month: 'long'});
 global.año = d.toLocaleDateString('es', {year: 'numeric'});
 global.tiempo = d.toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true});
 //* ****************************
-global.wm2 = `${dia} ${fecha}\nThe Mystic - Bot`;
-global.gt = 'The Mystic - Bot';
-global.mysticbot = 'The Mystic - Bot';
-global.channel = 'https://whatsapp.com/channel/0029Vaein6eInlqIsCXpDs3y';
-global.md = 'https://github.com/BrunoSobrino/TheMystic-Bot-MD';
-global.mysticbot = 'https://github.com/BrunoSobrino/TheMystic-Bot-MD';
+global.wm2 = `${dia} ${fecha}\nAbyss - Bot`;
+global.gt = 'Abyss┃ᴮᴼᵀ';
+global.mysticbot = 'Abyss┃ᴮᴼᵀ';
+global.channel = 'https://whatsapp.com/channel/0029VakDx9I0gcfFXnzZIX2v';
+global.md = 'https://github.com/';
+global.mysticbot = 'https://github.com/';
 global.waitt = '*_[ ⏳ ] Cargando..._*';
 global.waittt = '*_[ ⏳ ] Cargando..._*';
 global.waitttt = '*_[ ⏳ ] Cargando..._*';
-global.nomorown = '5219993404349';
+global.nomorown = '5492613619545';
 global.pdoc = ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.ms-excel', 'application/msword', 'application/pdf', 'text/rtf'];
 global.cmenut = '❖––––––『';
 global.cmenub = '┊✦ ';
