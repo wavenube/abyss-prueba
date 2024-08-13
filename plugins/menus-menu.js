@@ -1,107 +1,102 @@
+import { promises } from 'fs';
+import { join, dirname } from 'path';
 import fetch from 'node-fetch';
-import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { xpRange } from '../lib/levelling.js';
 
-const handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems }) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-  if (usedPrefix == 'a' || usedPrefix == 'A') return;
-
+let handler = async function (m, { conn, text, usedPrefix }) {
   try {
-    const img = './src/abyss.png';
-    const d = new Date(new Date + 3600000);
-    const locale = 'es-ES';
-    const week = d.toLocaleDateString(locale, { weekday: 'long' });
-    const date = d.toLocaleDateString(locale, { day: '2-digit', month: '2-digit', year: 'numeric' });
-    const _uptime = process.uptime() * 1000;
-    const uptime = clockString(_uptime);
-    const user = global.db.data.users[m.sender];
-    const { money, joincount } = global.db.data.users[m.sender];
-    const { exp, limit, level, role } = global.db.data.users[m.sender];
-    const rtotalreg = Object.values(global.db.data.users).filter((user) => user.registered == true).length;
-    const rtotal = Object.entries(global.db.data.users).length || '0'
-    const more = String.fromCharCode(8206);
-    const readMore = more.repeat(850);
-    const taguser = '@' + m.sender.split('@s.whatsapp.net')[0];
-    const doc = ['pdf', 'zip', 'vnd.openxmlformats-officedocument.presentationml.presentation', 'vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'vnd.openxmlformats-officedocument.wordprocessingml.document'];
-    const document = doc[Math.floor(Math.random() * doc.length)];
-    const str = `
-Hola ${taguser},
+    let _package = JSON.parse(await promises.readFile(join(__dirname, '../package.json')).catch(_ => ({}))) || {};
+    let { exp, diamond, level, role } = global.db.data.users[m.sender];
+    let { min, xp, max } = xpRange(level, global.multiplier);
+    let name = await conn.getName(m.sender);
+    let d = new Date(new Date() + 3600000);
+    let locale = 'es';
+    let weton = ['Pahing', 'Pon', 'Wage', 'Kliwon', 'Legi'][Math.floor(d / 84600000) % 5];
+    let week = d.toLocaleDateString(locale, { weekday: 'long' });
+    let date = d.toLocaleDateString(locale, {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+    let dateIslamic = Intl.DateTimeFormat(locale + '-TN-u-ca-islamic', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }).format(d);
+    let time = d.toLocaleTimeString(locale, {
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    });
+    let _uptime = process.uptime() * 1000;
+    let _muptime;
+    if (process.send) {
+      process.send('uptime');
+      _muptime = await new Promise(resolve => {
+        process.once('message', resolve);
+        setTimeout(resolve, 1000);
+      }) * 1000;
+    }
+    let muptime = clockString(_muptime);
+    let uptime = clockString(_uptime);
+    let totalreg = Object.keys(global.db.data.users).length;
+    let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length;
 
-> ★ Abyss Bot ★
+    let textTemplate = `.╭━━❍Abyss - Bot❍━━╮
+ ┃ ╭━━━━━━━━━━━━━━━━╮ 
+ ┃ ┃ ╭┈────────────╮ 
+ ┃ ┃ │❍ 🅼🅴🅽🆄 ❍ 
+ ┃ ┃ ╰┈────────────╯ 
+ 
+` // Resto del mensaje
 
-Nivel: ${level}
-Experiencia: ${exp}
-Rol: ${role}
-Límite: ${limit}
-Dinero: ${money}
-Contador de uniones: ${joincount}
-Es premium: ${user.premiumTime > 0 ? '✅' : (isPrems ? '✅' : '❌') || ''}
-${readMore}
+    let replace = {
+      '%': '%',
+      p: usedPrefix, uptime, muptime,
+      me: conn.getName(conn.user.jid),
+      sbot: (conn.user.jid == global.conn.user.jid ? '' : `\n▢ ✨ *Sub-Bot de:*\nwa.me/${global.conn.user.jid.split`@`[0]}`),
+      npmname: _package.name,
+      npmdesc: _package.description,
+      version: _package.version,
+      exp: exp - min,
+      maxexp: xp,
+      totalexp: exp,
+      xp4levelup: max - exp,
+      github: _package.homepage ? _package.homepage.url || _package.homepage : '[unknown github url]',
+      level, diamond, name, weton, week, date, dateIslamic, time, totalreg, rtotalreg, role,
+      readmore: readMore
+    };
 
-Comandos:
+    let text = textTemplate.replace(/%(\w+)/g, (_, key) => '' + (replace[key] || ''));
+    
+    let pp = './src/abyss.png';
 
-  ╭───── • ◆ • ─────╮ 
-  ├❧ _${usedPrefix}menuaudios_
-  ├❧ _${usedPrefix}menuanimes_
-  ├❧ _${usedPrefix}labiblia_
-  ├❧ _${usedPrefix}lang_ 
-  ├❧ _${usedPrefix}langgroup_ 
-  ├❧ _${usedPrefix}glx_
-  ╰───── • ◆ • ─────╯
-
-Más comandos:
-
-  ╭───── • ◆ • ─────╮
-  ├❧ _${usedPrefix}terminosycondiciones_
-  ├❧ _${usedPrefix}grupos_
-  ├❧ _${usedPrefix}estado_
-  ├❧ _${usedPrefix}infobot_
-  ├❧ _${usedPrefix}speedtest_
-  ├❧ _${usedPrefix}donar_
-  ├❧ _${usedPrefix}owner_
-  ├❧ _${usedPrefix}script_
-  ├❧ _${usedPrefix}reporte *<txt>*_
-  ├❧ _${usedPrefix}join *<wagp_url>*_
-  ├❧ _${usedPrefix}fixmsgespera_
-  ├❧ _bot_ (sin prefijo)
-  ╰───── • ◆ • ─────╯
-
-Otros comandos:
-
-  ╭───── • ◆ • ─────╮
-  ├❧ _${usedPrefix}serbot --code_
-  ├❧ _${usedPrefix}serbot_
-  ├❧ _${usedPrefix}deletebot_
-  ├❧ _${usedPrefix}token_
-  ├❧ _${usedPrefix}stop_
-  ├❧ _${usedPrefix}bots_
-  ├❧ _${usedPrefix}enable restrict_
-  ├❧ _${usedPrefix}disable restrict_
-  ├❧ _${usedPrefix}enable autoread_
-  ├❧ _${usedPrefix}disable autoread_
-  ├❧ _${usedPrefix}enable antispam_
-  ├❧ _${usedPrefix}disable antispam_
-  ├❧ _${usedPrefix}enable anticall_
-  ├❧ _${usedPrefix}disable anticall_
-  ├❧ _${usedPrefix}enable modoia_
-  ├❧ _${usedPrefix}disable modoia_
-  ├❧ _${usedPrefix}enable audios_bot_
-  ├❧ _${usedPrefix}disable audios_bot_
-  ├❧ _${usedPrefix}enable antiprivado_
-  ├❧ _${usedPrefix}disable antiprivado_
-  ╰───── • ◆ • ─────╯
-`;
-
-    await conn.sendFile(m.chat, img, './src/abyss2.png', str, m);
+    conn.sendFile(m.chat, pp, './src/abyss3.png', text.trim(), m, null, rcanal)
+  
+    m.react('📚')
+    
   } catch (e) {
-    console.error(e);
+    conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error', m);
+    throw e;
   }
 };
 
-const clockString = (ms) => {
-  let h = Math.floor(ms / 3600000) % 24;
-  let m = Math.floor(ms / 60000) % 60;
-  let s = Math.floor(ms / 1000) % 60;
-  return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':');
-};
+handler.command = ['allmenu'];
+handler.register = false;
 
 export default handler;
+
+const more = String.fromCharCode(8206);
+const readMore = more.repeat(4001);
+
+function clockString(ms) {
+  let d = isNaN(ms) ? '--' : Math.floor(ms / 86400000);
+  let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000) % 24;
+  let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60;
+  let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60;
+  return [d, 'd ', h, 'h ', m, 'm '].map(v => v.toString().padStart(2, 0)).join('');
+}
