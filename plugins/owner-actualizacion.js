@@ -36,6 +36,6 @@ try {
 m.reply(e)
 }
 };
-handler.command = /^(actualizacion|actualizaciones)/i;
+handler.command = /^(update|actualizar)/i;
 handler.rowner = true;
 export default handler;
